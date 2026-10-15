@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Don Bosco Sucre - Reservas</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         PORTADA
+    ========================================== -->
+
+    <header class="hero">
+
+        <!-- BOTÓN SECRETO DE ADMINISTRADORES -->
+        <button
+            class="admin-secret"
+            id="openAdmin"
+            title="Acceso administrativo">
+            <img
+            src="logo.png"
+            alt="Colegio Don Bosco">
+        </button>
+
+        <div class="hero-content">
+
+            <div class="hero-text">
+
+                <p class="eyebrow">
+                    COLEGIO DON BOSCO · SUCRE
+                </p>
+
+                <h1>
+                    Reserva los ambientes
+                    <strong>de tu colegio</strong>
+                </h1>
+
+                <p>
+                    Organiza tus actividades, clases, reuniones
+                    y eventos reservando los ambientes disponibles
+                    del Colegio Don Bosco.
+                </p>
+
+                <!-- ÚNICO BOTÓN PARA LOS ESTUDIANTES -->
+                <button
+                    class="primary-btn"
+                    id="heroLogin">
+                    Iniciar sesión para reservar
+                    <span>→</span>
+                </button>
+
+            </div>
+
+
+            <div class="hero-cards">
+
+    <div class="hero-card card-main">
+        <small>COLEGIO DON BOSCO</small>
+        <strong>Espacios para estudiar, crear y compartir</strong>
+    </div>
+
+    <div class="hero-card card-one">
+        <small>PRESENTACIONES</small>
+    </div>
+
+    <div class="hero-card card-two">
+        <small>EVENTOS</small>
+    </div>
+
+</div>
+
+        </div>
+
+        <div class="scroll-text">
+            Sistema de reservas
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         TODO ESTO ESTÁ OCULTO HASTA INICIAR SESIÓN
+    ========================================== -->
+
+    <main id="mainContent" class="hidden">
+
+
+        <!-- =====================================
+             AMBIENTES
+        ====================================== -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div>
+                    <p class="eyebrow">
+                        PASO 1 · AMBIENTES
+                    </p>
+
+                    <h2>
+                        Elige el ambiente
+                    </h2>
+                </div>
+
+                <p>
+                    Selecciona el espacio que deseas utilizar.
+                </p>
+
+            </div>
+
+
+            <div
+                class="rooms-grid"
+                id="roomsGrid">
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             CALENDARIO Y HORARIOS
+        ====================================== -->
+
+        <section class="section booking-section">
+
+            <div class="booking-container">
+
+
+                <!-- INFORMACIÓN DEL AMBIENTE -->
+
+                <aside class="booking-info">
+
+                    <p class="eyebrow">
+                        AMBIENTE SELECCIONADO
+                    </p>
+
+                    <h2 id="selectedRoomName">
+                        Selecciona un ambiente
+                    </h2>
+
+                    <p id="selectedRoomDescription">
+                        Selecciona una de las opciones
+                        para comenzar.
+                    </p>
+
+
+                    <div class="room-details">
+
+                        <div>
+                            <span>Capacidad</span>
+                            <strong id="roomCapacity">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Tipo</span>
+                            <strong id="roomType">
+                                —
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="legend">
+
+                        <div>
+                            <span class="legend-green"></span>
+                            Disponible
+                        </div>
+
+                        <div>
+                            <span class="legend-red"></span>
+                            Reservado
+                        </div>
+
+                        <div>
+                            <span class="legend-blue"></span>
+                            Seleccionado
+                        </div>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- CALENDARIO -->
+
+                <div class="scheduler">
+
+                    <div class="scheduler-header">
+
+                        <div>
+                            <p class="step-number">
+                                2
+                            </p>
+
+                            <h3>
+                                Selecciona una fecha
+                            </h3>
+                        </div>
+
+                        <div class="month-controls">
+
+                            <button id="prevMonth">
+                                ‹
+                            </button>
+
+                            <strong id="monthLabel">
+                                —
+                            </strong>
+
+                            <button id="nextMonth">
+                                ›
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="calendar"
+                        class="calendar">
+                    </div>
+
+
+                    <!-- HORARIO -->
+
+                    <div class="time-header">
+
+                        <div>
+                            <p class="step-number">
+                                3
+                            </p>
+
+                            <h3>
+                                Selecciona el horario
+                            </h3>
+                        </div>
+
+                        <span id="dateLabel">
+                            Selecciona un día
+                        </span>
+
+                    </div>
+
+
+                    <!-- RANGO -->
+
+                    <div class="range-selector">
+
+                        <label>
+                            Desde
+
+                            <select id="startTime">
+                            </select>
+
+                        </label>
+
+
+                        <span>
+                            →
+                        </span>
+
+
+                        <label>
+                            Hasta
+
+                            <select id="endTime">
+                            </select>
+
+                        </label>
+
+
+                        <button
+                            class="primary-btn small-btn"
+                            id="checkRange">
+                            Comprobar
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="rangeStatus"
+                        class="range-status">
+                        Selecciona una fecha y un horario.
+                    </div>
+
+
+                    <div class="available-title">
+
+                        <strong>
+                            Horarios disponibles
+                        </strong>
+
+                        <small>
+                            Rojo = ocupado · Verde = disponible
+                        </small>
+
+                    </div>
+
+
+                    <div
+                        id="times"
+                        class="times">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             DATOS DE LA RESERVA
+        ====================================== -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div>
+                    <p class="eyebrow">
+                        PASO 4 · DATOS
+                    </p>
+
+                    <h2>
+                        Datos de la reserva
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <form
+                id="reservationForm"
+                class="reservation-form">
+
+
+                <div class="reservation-summary">
+
+                    <div>
+                        <span>Ambiente</span>
+                        <strong id="summaryRoom">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Fecha</span>
+                        <strong id="summaryDate">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Horario</span>
+                        <strong id="summaryTime">
+                            —
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <label>
+                        Nombre completo
+
+                        <input
+                            type="text"
+                            id="name"
+                            required>
+                    </label>
+
+
+                    <label>
+                        Curso / área
+
+                        <input
+                            type="text"
+                            id="course"
+                            required>
+                    </label>
+
+
+                    <label>
+                        Teléfono
+
+                        <input
+                            type="text"
+                            id="phone"
+                            required>
+                    </label>
+
+
+                    <label>
+                        Correo electrónico
+
+                        <input
+                            type="email"
+                            id="email"
+                            required>
+                    </label>
+
+
+                    <label class="full">
+                        Motivo de la reserva
+
+                        <textarea
+                            id="reason"
+                            required>
+                        </textarea>
+                    </label>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+                        Confirmar reserva ✓
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- =====================================
+             MIS RESERVAS
+        ====================================== -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div>
+                    <p class="eyebrow">
+                        REGISTRO PERSONAL
+                    </p>
+
+                    <h2>
+                        Mis reservas
+                    </h2>
+                </div>
+
+                <span
+                    id="loggedAs"
+                    class="logged-user">
+                </span>
+
+            </div>
+
+
+            <div
+                id="reservationsList"
+                class="reservations-list">
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         LOGIN ESTUDIANTES
+    ========================================== -->
+
+    <div
+        class="modal hidden"
+        id="loginModal">
+
+        <div class="modal-box">
+
+            <button
+                class="close"
+                data-close="loginModal">
+                ×
+            </button>
+
+            <div class="login-logo">
+                DB
+            </div>
+
+            <p class="eyebrow">
+                COLEGIO DON BOSCO
+            </p>
+
+            <h2>
+                Iniciar sesión
+            </h2>
+
+            <p>
+                Ingresa para acceder a los ambientes
+                y realizar una reserva.
+            </p>
+
+
+            <form id="loginForm">
+
+                <label>
+                    Usuario
+
+                    <input
+                        type="text"
+                        id="loginUser"
+                        required>
+                </label>
+
+
+                <label>
+                    Contraseña
+
+                    <input
+                        type="password"
+                        id="loginPass"
+                        required>
+                </label>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn full-btn">
+                    Ingresar
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         LOGIN ADMINISTRADORES
+    ========================================== -->
+
+    <div
+        class="modal hidden"
+        id="adminLoginModal">
+
+        <div class="modal-box">
+
+            <button
+                class="close"
+                data-close="adminLoginModal">
+                ×
+            </button>
+
+            <div class="admin-logo">
+                DB
+            </div>
+
+            <p class="eyebrow">
+                ACCESO PRIVADO
+            </p>
+
+            <h2>
+                Administración
+            </h2>
+
+            <p>
+                Solo los administradores pueden
+                acceder a este panel.
+            </p>
+
+
+            <form id="adminLoginForm">
+
+                <label>
+                    Usuario
+
+                    <input
+                        type="text"
+                        id="adminUser"
+                        required>
+                </label>
+
+
+                <label>
+                    Contraseña
+
+                    <input
+                        type="password"
+                        id="adminPass"
+                        required>
+                </label>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn full-btn">
+                    Entrar al panel
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         PANEL ADMINISTRATIVO
+    ========================================== -->
+
+    <div
+        id="adminPanel"
+        class="admin-panel hidden">
+
+        <div class="admin-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    PANEL PRIVADO
+                </p>
+
+                <h2>
+                    Todas las reservas
+                </h2>
+
+                <p>
+                    Aquí aparecen todas las reservas
+                    realizadas por los usuarios.
+                </p>
+
+            </div>
+
+
+            <div class="admin-buttons">
+
+                <button
+                    class="secondary-btn"
+                    id="exportReservations">
+                    Exportar CSV
+                </button>
+
+                <button
+                    class="primary-btn"
+                    id="closeAdminPanel">
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-filters">
+
+            <input
+                type="text"
+                id="adminSearch"
+                placeholder="Buscar reserva...">
+
+
+            <select id="adminRoomFilter">
+
+                <option value="">
+                    Todos los ambientes
+                </option>
+
+            </select>
+
+
+            <select id="adminDateFilter">
+
+                <option value="">
+                    Todas las fechas
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="admin-table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Fecha</th>
+
+                        <th>Horario</th>
+
+                        <th>Ambiente</th>
+
+                        <th>Persona</th>
+
+                        <th>Curso / Área</th>
+
+                        <th>Contacto</th>
+
+                        <th>Motivo</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="adminTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         EDITAR RESERVA
+    ========================================== -->
+
+    <div
+        class="modal hidden"
+        id="editModal">
+
+        <div class="modal-box">
+
+            <button
+                class="close"
+                data-close="editModal">
+                ×
+            </button>
+
+            <p class="eyebrow">
+                ADMINISTRADOR
+            </p>
+
+            <h2>
+                Editar reserva
+            </h2>
+
+
+            <form id="editForm">
+
+                <input
+                    type="hidden"
+                    id="editId">
+
+
+                <label>
+                    Ambiente
+
+                    <select id="editRoom">
+                    </select>
+                </label>
+
+
+                <label>
+                    Fecha
+
+                    <input
+                        type="date"
+                        id="editDate"
+                        required>
+                </label>
+
+
+                <div class="two-columns">
+
+                    <label>
+                        Desde
+
+                        <select id="editStart">
+                        </select>
+                    </label>
+
+
+                    <label>
+                        Hasta
+
+                        <select id="editEnd">
+                        </select>
+                    </label>
+
+                </div>
+
+
+                <label>
+                    Nombre
+
+                    <input
+                        type="text"
+                        id="editName"
+                        required>
+                </label>
+
+
+                <label>
+                    Curso / área
+
+                    <input
+                        type="text"
+                        id="editCourse"
+                        required>
+                </label>
+
+
+                <label>
+                    Teléfono
+
+                    <input
+                        type="text"
+                        id="editPhone"
+                        required>
+                </label>
+
+
+                <label>
+                    Correo
+
+                    <input
+                        type="email"
+                        id="editEmail"
+                        required>
+                </label>
+
+
+                <label>
+                    Motivo
+
+                    <textarea
+                        id="editReason"
+                        required>
+                    </textarea>
+                </label>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        data-close="editModal">
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- MENSAJES -->
+
+    <div
+        id="toast"
+        class="toast">
+    </div>
+
+
+    <footer>
+
+        <strong>
+            DON BOSCO SUCRE
+        </strong>
+
+        <span>
+            Sistema de reserva de ambientes
+        </span>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
